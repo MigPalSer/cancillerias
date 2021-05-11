@@ -2,10 +2,10 @@ package motor.activaciones;
 
 import java.util.HashSet;
 
-import modelo.bandera.Bandera;
 import modelo.escenario.Escenario;
 import modelo.jugador.*;
 import modelo.territorio.Territorio;
+import modelo.tropas.Bandera;
 import motor.activaciones.mover.ServicioConexiones;
 import motor.activaciones.mover.ServicioMovimientos;
 import motor.vista.*;
@@ -28,7 +28,7 @@ public class ActivacionReforzar extends Activacion {
 		Bandera banderadestino=t.getTropas().get(j);
 
 		//Obtiene el hashset de territorios de origen posibles
-		HashSet<Territorio> ts=ServicioConexiones.territoriosOrigen(e, j, t, 2);
+		HashSet<Territorio> ts=ServicioConexiones.territoriosOrigen(e, j, t, 2, false);
 		
 		//Realiza las decisiones de reforzar
 		ServicioMovimientos.ReforzarDesdeTerritoriosDeOrigen(ts, j, banderadestino);

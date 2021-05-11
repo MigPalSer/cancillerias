@@ -2,10 +2,10 @@ package motor.partida;
 
 import java.util.Collection;
 
-import modelo.bandera.Bandera;
 import modelo.escenario.Escenario;
 import modelo.jugador.Jugador;
 import modelo.territorio.Territorio;
+import modelo.tropas.Bandera;
 
 public class ServicioTerritorios {
 

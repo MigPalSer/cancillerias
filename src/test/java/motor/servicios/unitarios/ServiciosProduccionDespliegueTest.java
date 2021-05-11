@@ -6,16 +6,22 @@ import static org.hamcrest.MatcherAssert.*;
 
 import java.io.PrintStream;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import modelo.bandera.Bandera;
-import modelo.bandera.ServicioBanderas;
+import modelo.edificios.Edificios;
 import modelo.jugador.*;
+import modelo.jugador.plantillas.PlantillaProduccion;
+import modelo.jugador.plantillas.PlantillaProduccion.Opcion;
 import modelo.territorio.Territorio;
-import motor.activaciones.producir.ServicioProduccion;
+import modelo.tropas.Bandera;
+import modelo.tropas.ServicioColeccionTropas;
+import modelo.tropas.cadena.SeccionCadena;
+import motor.activaciones.despliegue.ServicioDespliegue;
+import motor.integracion.ControladorFixed100;
 
 class ServiciosProduccionDespliegueTest {
 	
@@ -28,13 +34,14 @@ class ServiciosProduccionDespliegueTest {
 	
 	@BeforeEach
 	void setUp() {
-		jugador=new Jugador(0, "Dummy");
+		jugador=FactoriaJugador.createJugador("Dummy");
 		territorio=new Territorio();
 		territorio.setPropietario(jugador);
 		territorio.setTropas(new HashMap<Jugador, Bandera>());
 		bandera=new Bandera(jugador);
 		territorio.getTropas().put(jugador, bandera);
 		territorio.setSoldadesca(1000);
+		territorio.setEdificios(new Edificios());
 		
 		territorio2=new Territorio();
 		territorio2.setPropietario(jugador);
@@ -48,27 +55,48 @@ class ServiciosProduccionDespliegueTest {
 		
 		bandera.setInfanteria(5);
 		bandera.setArtilleria(3);
+		
+		jugador.setControlador(new ControladorFixed100());
 	}
 	
 	@Test
 	void testDespliegue() {
-		ServicioBanderas.desplegar(jugador, territorio, 10, 10);
+		ServicioColeccionTropas.desplegar(jugador, territorio, 10, 10);
 		assertThat(territorio.getTropas().get(jugador).getInfanteria(), equalTo(15));
 		assertThat(territorio.getTropas().get(jugador).getArtilleria(), equalTo(13));
 
 	}
 	
+	
 	@Test
 	void testDespliegueTerrenoVacio() {
-		ServicioBanderas.desplegar(jugador, territorio3, 10, 10);
+		ServicioColeccionTropas.desplegar(jugador, territorio3, 10, 10);
 		assertThat(territorio3.getTropas().get(jugador).getInfanteria(), equalTo(10));
 		assertThat(territorio3.getTropas().get(jugador).getArtilleria(), equalTo(10));
 	}
 
 	@Test
+	void testDesplegar() {
+		
+		SeccionCadena ct=jugador.getCadena().getActual();
+		ct.setInfanteria(30);
+		
+		assertThat(jugador.getCadena().getActual().get("reclutas"), equalTo(30));
+		
+		ServicioDespliegue.despliegue(jugador, territorio);
+		
+		
+		assertThat(territorio.getTropas().get(jugador).getInfanteria(), equalTo(35));
+		assertThat(territorio.getTropas().get(jugador).getArtilleria(), equalTo(3));
+		assertThat(jugador.getCadena().getActual().get("reclutas"), equalTo(0));
+
+	}
+	
+	/*
+	@Test
 	void testCompraEnTerreno() {
 		jugador.setDinero(200);
-		ServicioProduccion.producir(jugador, territorio, 10, 10);
+		ServicioDespliegue.producir(jugador, territorio, 10, 10);
 		assertThat(territorio.getTropas().get(jugador).getInfanteria(), equalTo(15));
 		assertThat(territorio.getTropas().get(jugador).getArtilleria(), equalTo(13));
 		assertThat(jugador.getDinero(), equalTo(130));
@@ -78,7 +106,7 @@ class ServiciosProduccionDespliegueTest {
 	void testCompraSinDinero() {
 		System.setOut(new ImpresionVacia(System.out));
 		jugador.setDinero(10);
-		ServicioProduccion.producir(jugador, territorio, 10, 10);
+		ServicioDespliegue.producir(jugador, territorio, 10, 10);
 		assertThat(territorio.getTropas().get(jugador).getInfanteria(), equalTo(5));
 		assertThat(territorio.getTropas().get(jugador).getArtilleria(), equalTo(3));
 		assertThat(jugador.getDinero(), equalTo(10));
@@ -89,10 +117,11 @@ class ServiciosProduccionDespliegueTest {
 	void testCompraSinControlar() {
 		System.setOut(new ImpresionVacia(System.out));
 		jugador.setDinero(10);
-		ServicioProduccion.producir(jugador, territorio3, 10, 10);
+		ServicioDespliegue.producir(jugador, territorio3, 10, 10);
 		assertThat(jugador.getDinero(), equalTo(10));
 		System.setOut(new PrintStream(System.out));
 	}
+	*/
 	
 	@AfterEach
 	void tearDown() {

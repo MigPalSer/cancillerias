@@ -6,11 +6,13 @@ import java.util.List;
 import modelo.escenario.Escenario;
 import modelo.jugador.*;
 import modelo.territorio.Territorio;
+import modelo.tropas.cadena.ServicioCadena;
 import motor.activaciones.Activacion;
 import motor.activaciones.ActivacionAsaltar;
 import motor.activaciones.ActivacionInvadir;
 import motor.activaciones.ActivacionMovimientoAmigo;
 import motor.activaciones.ActivacionReforzar;
+import motor.produccion.ProduccionJugador;
 import motor.vista.ServicioMensajes;
 
 public class Partida implements Runnable {
@@ -59,6 +61,11 @@ public class Partida implements Runnable {
 
 	void turno(Jugador j) {
 
+		//Produccion inicial
+		ProduccionJugador.produccion(j);
+		
+		ServicioMensajes.println(j.getCadena().toString());
+		
 		boolean turnoencurso = true;
 
 		// Realiza activaciones mientras pueda
@@ -99,9 +106,10 @@ public class Partida implements Runnable {
 
 		} while (turnoencurso);
 		
+		//Parte final, de desactivar, recaudar y avanzar la cola
 		ServicioTerritorios.desactivarTodosTerritorios(escenario);
 		ServicioIngresos.producir(escenario, j);
-
+		ServicioCadena.avanzarCadena(j.getCadena());
 	}
 
 	int elegirTerritorio(Jugador jugador, List<Integer> territorioselegibles) {

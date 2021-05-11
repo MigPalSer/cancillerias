@@ -1,0 +1,7 @@
+ALFA 2
+Cosas a comprobar
+-La secuencia de juego es correcta
+-No deja activar territorios dos veces por turno
+-Las activaciones que se ofrecen son correctas en cada caso
+-Los territorios desde los que se pueden mover son correctos
+-Comprobar que la distribucion de bajas es aleatoria

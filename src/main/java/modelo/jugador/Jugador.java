@@ -1,5 +1,12 @@
 package modelo.jugador;
 
+import modelo.jugador.plantillas.FactoriaPlantillaProduccion;
+import modelo.jugador.plantillas.PlantillaProduccion;
+import modelo.jugador.plantillas.TablaValores;
+import modelo.jugador.plantillas.FactoriaPlantillaProduccion.Plantilla;
+import modelo.jugador.plantillas.ModeloUnidad;
+import modelo.tropas.cadena.CadenaProduccion;
+import modelo.tropas.cadena.FactoriaCadena;
 import motor.decisor.Decision;
 
 public class Jugador {
@@ -10,7 +17,21 @@ public class Jugador {
 	int dinero;
 	String nombre;
 	Decision controlador;
+	CadenaProduccion cadena;
+	PlantillaProduccion plantilla_produccion;
 	
+	public PlantillaProduccion getPlantillaProduccion() {
+		return plantilla_produccion;
+	}
+	public void setPlantillaProduccion(PlantillaProduccion plantilla) {
+		this.plantilla_produccion = plantilla;
+	}
+	public CadenaProduccion getCadena() {
+		return cadena;
+	}
+	public void setCadena(CadenaProduccion cadena) {
+		this.cadena = cadena;
+	}
 	public int getDinero() {
 		return dinero;
 	}
@@ -55,13 +76,19 @@ public class Jugador {
 		return true;
 	}
 	
-	public Jugador(int dinero, String nombre) {
-		super();
-		this.dinero = dinero;
-		this.nombre = nombre;
-		this.controlador=null;
+	
+	public Jugador() {
+		
 	}
 	
+	//Aun por implementar en más detalle con las tecnologias
+	public String supervivencia(String s, int tirada_supervivencia) {
+		return getModelo(s).sobrevive(tirada_supervivencia);
+	}
 	
+	//Metodo para obtener las estadisticas de una tropa
+	public ModeloUnidad getModelo(String s) {
+		return plantilla_produccion.get(s);
+	}
 	
 }

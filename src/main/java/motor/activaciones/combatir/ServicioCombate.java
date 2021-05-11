@@ -1,12 +1,13 @@
 package motor.activaciones.combatir;
 
-import java.util.Random;
 import java.util.Set;
+import java.util.HashMap;
 import java.util.Map.Entry;
 
-import modelo.bandera.Bandera;
 import modelo.jugador.Jugador;
+import modelo.jugador.plantillas.TablaValores;
 import modelo.territorio.Territorio;
+import modelo.tropas.Bandera;
 import motor.dado.Dado;
 import motor.dado.Dado8;
 import motor.partida.ServicioTerritorios;
@@ -29,66 +30,89 @@ public class ServicioCombate {
 	}
 
 	//Consideramos por defecto que la bandera 1 es la que ataca y la b2 la que defiende
-	public static void combatir(Bandera b1, Bandera b2) {
+	public static void combateTerrestre(Bandera banda_atacante, Bandera banda_defensora) {
 		
-		int impactosab1=0;
-		int impactosab2=0;
+		//TODO implementar limitacion equipo
+		int infanteria_atacante=banda_atacante.numeroInfanterias();
+		int infanteria_defensora=banda_defensora.numeroInfanterias();
 		
-		impactosab1+=disparosInfanteria(b2.getInfanteria(), false);
-		impactosab1+=disparosArtilleria(b2.getArtilleria(), false);
+		/*HashMap<String, Integer> tropasatacantes=banda_atacante.getTropas();
+		HashMap<String, Integer> tropasdefensoras=banda_defensora.getTropas();
 		
-		impactosab2+=disparosInfanteria(b1.getInfanteria(), true);
-		impactosab2+=disparosArtilleria(b1.getArtilleria(), true);
+		for (String s : tropasatacantes.keySet()) {
+			int numero=tropasatacantes.get(s);
+			if(numero>0)impactos_al_defensor+=disparoTerrestre(s, numero, true);
+		}
 		
-		asignacionimpactos(b1, impactosab1);
-		asignacionimpactos(b2, impactosab2);
+		for (String s : tropasdefensoras.keySet()) {
+			int numero=tropasdefensoras.get(s);
+			if(numero>0)impactos_al_atacante+=disparoTerrestre(s, numero, false);
+		}
+		*/
+		
+
+		int impactos_al_atacante=calcularImpactosTotales(banda_defensora, false);
+		int impactos_al_defensor=calcularImpactosTotales(banda_atacante, true);
+		
+		ServicioMensajes.println("El atacante ha causado"+impactos_al_defensor+"impactos");
+		ServicioMensajes.println("El defensor ha causado"+impactos_al_atacante+"impactos");
+
+		ServicioDanho.asignacionImpactos(banda_atacante, impactos_al_atacante);
+		ServicioDanho.asignacionImpactos(banda_defensora, impactos_al_defensor);
 	}
 	
-	public static void asignacionimpactos(Bandera b, int impactos) {
-	
-		int inf=b.getInfanteria();
-		int art=b.getArtilleria();
-		if(impactos>=(inf+art)) {
-			b.setInfanteria(0);
-			b.setArtilleria(0);
+	public static int calcularImpactosTotales(Bandera b, boolean atacante) {
+		int impactos=0;
+		for (String s : b.getTropas().keySet()) {
+			int numero=b.get(s);
+			int valor=obtenerValorAtaque(b, s, atacante);
+			if(numero>0)impactos+=disparoTerreste(valor, numero);
+		}
+		
+		return impactos;
+	}
+	/*
+	public static int disparoTerreste(String tipo, int numero, boolean atacante, Dado dado) {
+		int impactos=0;
+		int dificultadimpacto=0;
+		if(atacante) {
+			dificultadimpacto=TablaValores.valorAtaqueTerrestre(tipo);
 		}else {
-			int total=inf+art;
-			int infanteriaactual=inf;
-			int impactosainfanteria=0;
-			int impactosaartilleria=0;
-			Random r=new Random();
-			for (int i = 0; i < impactos; i++) {
-				if((r.nextInt(total)+1)>infanteriaactual) {
-					impactosaartilleria++;
-				}else {
-					impactosainfanteria++;
-					infanteriaactual--;
-				}
-				total--;
-			}
-			b.setInfanteria(inf-impactosainfanteria);
-			b.setArtilleria(art-impactosaartilleria);
+			dificultadimpacto=TablaValores.valorDefensaTerrestre(tipo);
 		}
-	}
-	
-	public static int disparosInfanteria(int infanterias, boolean atacante) {
-		int impactos=0;
-		int valor=atacante?7:6;
-		for (int i = 0; i < infanterias; i++) {
-			if(dado.tira(valor))impactos++;
+		for (int i = 0; i < numero; i++) {
+			if(dado.tira(dificultadimpacto))impactos++;
 		}
 		return impactos;
 	}
 	
-	public static int disparosArtilleria(int artillerias, boolean atacante) {
+	public static int disparoTerrestre (String tipo, int numero, boolean atacante) {
+		return disparoTerreste(tipo, numero, atacante, dado);
+	}*/
+	
+
+	public static int disparoTerreste(int valor, int numero, Dado dado) {
 		int impactos=0;
-		int valor=atacante?5:6;
-		for (int i = 0; i < artillerias; i++) {
-			if(dado.tira(valor))impactos++;
+		int dificultadimpacto=valor;
+		for (int i = 0; i < numero; i++) {
+			if(dado.tira(dificultadimpacto))impactos++;
 		}
 		return impactos;
 	}
 	
 	
+	public static int disparoTerreste(int valor, int numero) {
+		return disparoTerreste(valor, numero, dado);
+	}
+	
+	public static int obtenerValorAtaque(Bandera b, String tipo, boolean atacante) {
+		int valor=9;
+		if(atacante) {
+			valor=b.getPropietario().getModelo(tipo).getValorAtaque();
+		}else {
+			valor=b.getPropietario().getModelo(tipo).getValorDefensa();
+		}
+		return valor;
+	}
 	
 }

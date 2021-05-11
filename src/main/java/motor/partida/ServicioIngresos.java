@@ -8,7 +8,7 @@ public class ServicioIngresos {
 
 	public static void producir(Escenario e, Jugador j) {
 	
-		int dinero=j.getDinero();
+		int dinero=0;
 		
 		for (int i = 1; i <= e.getTerritorios().size() ; i++) {
 			Territorio t=e.getTerritorios().get(i);
@@ -17,7 +17,7 @@ public class ServicioIngresos {
 			}
 		}
 		
-		j.setDinero(dinero);
+		ServicioJugador.ingresar(j, dinero);;
 	}
 	
 }

@@ -2,8 +2,9 @@ package modelo.territorio;
 
 import java.util.HashMap;
 
-import modelo.bandera.Bandera;
+import modelo.edificios.Edificios;
 import modelo.jugador.Jugador;
+import modelo.tropas.Bandera;
 
 public class Territorio {
 
@@ -15,9 +16,20 @@ public class Territorio {
 	Jugador propietario;
 	HashMap<Jugador, Bandera> tropas;
 	boolean activado, disputado;
+	Edificios edificios;
 	
+	//Pequeña funcionalidad que nos devuelve el numero de fábricas y por lo tanto la capacidad que tenemos de producir equipo.
+	public int capacidadProduccionEquipo() {
+		return edificios.getFabricas();
+	}
 	
+	public Edificios getEdificios() {
+		return edificios;
+	}
 	
+	public void setEdificios(Edificios edificios) {
+		this.edificios = edificios;
+	}
 	public int getSoldadesca() {
 		return soldadesca;
 	}

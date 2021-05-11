@@ -14,4 +14,14 @@ public class Dado8 implements Dado {
 		return (r.nextInt(8)+1)>=dificultad;
 	}
 
+	@Override
+	public int generaIndice(int maximo) {
+		return r.nextInt(maximo);
+	}
+
+	@Override
+	public int resultadod8() {
+		return (r.nextInt(8)+1);
+	}
+
 }

@@ -9,6 +9,7 @@ public class ServicioJugador {
 		j.setDinero(saldo);
 	}
 	
+	//No es responsable de evitar que el saldo sea negativo
 	public static void gastar(Jugador j, int dinero) {
 		int saldo=j.getDinero();
 		saldo-=dinero;

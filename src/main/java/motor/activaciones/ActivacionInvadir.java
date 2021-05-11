@@ -2,10 +2,10 @@ package motor.activaciones;
 
 import java.util.HashSet;
 
-import modelo.bandera.Bandera;
 import modelo.escenario.Escenario;
 import modelo.jugador.*;
 import modelo.territorio.Territorio;
+import modelo.tropas.Bandera;
 import motor.activaciones.combatir.ServicioCombate;
 import motor.activaciones.combatir.ServicioEnemigos;
 import motor.activaciones.mover.ServicioConexiones;
@@ -31,7 +31,7 @@ public class ActivacionInvadir extends Activacion {
 		Bandera banderadestino=t.getTropas().get(j);
 
 		//Obtiene el hashset de territorios de origen posibles
-		HashSet<Territorio> ts=ServicioConexiones.territoriosOrigen(e, j, t, 1);
+		HashSet<Territorio> ts=ServicioConexiones.territoriosOrigen(e, j, t, 1, true);
 		
 		//Realiza las decisiones de reforzar
 		ServicioMovimientos.ReforzarDesdeTerritoriosDeOrigen(ts, j, banderadestino);
@@ -41,7 +41,7 @@ public class ActivacionInvadir extends Activacion {
 		ServicioTerritorios.actualizaDisputa(t);
 		if(t.isDisputado()) {
 			Bandera banderaenemiga=ServicioEnemigos.tropasEnemigas(t, j);
-			ServicioCombate.combatir(banderadestino, banderaenemiga);
+			ServicioCombate.combateTerrestre(banderadestino, banderaenemiga);
 		}
 
 		

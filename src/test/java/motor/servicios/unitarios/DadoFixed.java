@@ -7,8 +7,18 @@ public class DadoFixed implements Dado {
 	//Siempre aciertan
 	
 	public boolean tira(int dificultad) {
-		// TODO Auto-generated method stub
 		return true;
+	}
+
+	@Override
+	public int generaIndice(int maximo) {
+		//No implementado
+		return 0;
+	}
+
+	@Override
+	public int resultadod8() {
+		return 8;
 	}
 
 }

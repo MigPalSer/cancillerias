@@ -1,8 +1,8 @@
 package motor.activaciones.combatir;
 
-import modelo.bandera.Bandera;
 import modelo.jugador.Jugador;
 import modelo.territorio.Territorio;
+import modelo.tropas.Bandera;
 
 //Su responsabilidad es devolvernos las banderas enemigas en cada caso
 public class ServicioEnemigos {

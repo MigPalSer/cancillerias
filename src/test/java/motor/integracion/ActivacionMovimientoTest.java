@@ -16,6 +16,7 @@ import motor.activaciones.ActivacionMovimientoAmigo;
 
 class ActivacionMovimientoTest {
 
+	/*
 	@Test
 	void test() {
 		Escenario e=FactoriaEscenario.crear(Mapas.ALFA1);
@@ -31,5 +32,6 @@ class ActivacionMovimientoTest {
 		assertThat(e.getTerritorios().get(1).getTropas().get(francia).getInfanteria(), equalTo(0));
 		assertThat(e.getTerritorios().get(1).getTropas().get(francia).getArtilleria(), equalTo(0));
 	}
-
+*/
+	
 }

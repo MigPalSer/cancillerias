@@ -5,10 +5,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
-import modelo.bandera.Bandera;
 import modelo.escenario.Escenario;
 import modelo.jugador.Jugador;
 import modelo.territorio.Territorio;
+import modelo.tropas.Bandera;
 
 import java.util.Set;
 
@@ -120,7 +120,7 @@ public class ServicioMensajes {
 			Collection<Bandera> banderas = t.getTropas().values();
 			for (Bandera b : banderas) {
 				out(b.getPropietario().getNombre() + " - " + b.getInfanteria() 
-						+ "/" + b.getArtilleria());
+						+ "/" + b.getArtilleria()+ "/" + b.get("carros"));
 			}
 		}
 		out("********************************");

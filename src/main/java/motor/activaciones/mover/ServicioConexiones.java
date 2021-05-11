@@ -34,7 +34,7 @@ public class ServicioConexiones {
 	}
 
 	//Busca desde qué territorios se puede mover al terreno activado teniendo en cuenta ya activaciones y terrenos enemigos
-	public static HashSet<Territorio> territoriosOrigen(Escenario e, Jugador j, Territorio t, int i){
+	public static HashSet<Territorio> territoriosOrigen(Escenario e, Jugador j, Territorio t, int i, boolean invasion){
 		
 		//Elige todos los territorios en la distancia correspondiente a la activacion
 		HashSet<Territorio> ts=territoriosConectados(e, t, i);
@@ -43,10 +43,15 @@ public class ServicioConexiones {
 		//que no estén disputados y que no sea uno el propietario, para eliminarlos del primer hashset
 		HashSet<Territorio> tr=new HashSet<Territorio>();
 		for (Territorio territorio : ts) {
+			//Quitamos los activados
 			if(territorio.isActivado()) {
 				tr.add(territorio);
 			}
+			//Quitamos los territorios enemigos que no estén disputados
 			else if(!territorio.isDisputado()&&!territorio.getPropietario().equals(j)) {
+				tr.add(territorio);
+				//Si es una invasion, quitamos los territorios disputados
+			}else if(invasion&&territorio.isDisputado()) {
 				tr.add(territorio);
 			}
 		}
@@ -54,7 +59,6 @@ public class ServicioConexiones {
 	
 		return ts;
 	}
-	
-	
+
 	
 }

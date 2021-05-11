@@ -1,0 +1,18 @@
+Reglamento provisional
+
+Estructura del juego
+	Rondas
+		Cada ronda tiene un turno por jugador
+			Turno
+				Comienza produciendo unidades, para añadirlo a su cola de producción.
+				Realiza activaciones de cada territorio.
+					Al activar un territorio se pueden mover tropas desde territorios adyacentes no enemigos.
+						Invasión: distancia 1 y sólo desde territorios no disputados ni enemigos.
+						Asalto: distancia 1.
+						Refuerzo: distancia 2.
+						Movimiento amigo: distancia 2.
+					Puede haber combate. Ambas partes harán una ronda de disparos simultanea con diferentes valores dependiendo
+					de quién es atacante y quién defensor. Los impactos se asignan de forma aleatoria y las tropas impactadas hacen
+					una tirada de supervivencia para ver si mueren, regresan a la cola de producción o ignoran el impacto.
+					Puede haber producción, limitada por la soldadesca y la capacidad industrial del territorio.
+				Finaliza el turno cobrando los ingresos y desactivando todos los territorios.

@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import modelo.bandera.Bandera;
+import modelo.jugador.FactoriaJugador;
 import modelo.jugador.Jugador;
 import modelo.territorio.FactoriaTerritorio;
 import modelo.territorio.Territorio;
+import modelo.tropas.Bandera;
 
 public class FactoriaEscenario {
 
@@ -24,8 +25,8 @@ public class FactoriaEscenario {
 			
 			//Creamos y añadimos los jugadores al escenario
 			
-			Jugador franceses=new Jugador(10, "Francia");
-			Jugador alemanes=new Jugador(10, "Alemania");
+			Jugador franceses=FactoriaJugador.createJugador(10, "Francia");
+			Jugador alemanes=FactoriaJugador.createJugador(10, "Alemania");
 			
 			HashMap<String, Jugador> jugadores=new HashMap<String,Jugador>();
 			jugadores.put("Alemania", alemanes);
@@ -64,7 +65,8 @@ public class FactoriaEscenario {
 			e.getTerritorios().get(1).getTropas().put(franceses, bandera1);
 			
 			Bandera bandera2=new Bandera(franceses);
-			bandera2.setInfanteria(2);
+			bandera2.setInfanteria(5);
+			bandera2.set("carros", 5);
 			e.getTerritorios().get(2).getTropas().put(franceses, bandera2);
 			
 			Bandera bandera3=new Bandera(alemanes);

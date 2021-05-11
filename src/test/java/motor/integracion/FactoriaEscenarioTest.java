@@ -6,11 +6,11 @@ import java.util.HashSet;
 
 import org.junit.jupiter.api.Test;
 
-import modelo.bandera.Bandera;
 import modelo.escenario.Escenario;
 import modelo.escenario.FactoriaEscenario;
 import modelo.jugador.Jugador;
 import modelo.territorio.Territorio;
+import modelo.tropas.Bandera;
 import motor.activaciones.mover.ServicioConexiones;
 import motor.partida.ServicioEscenario;
 import motor.partida.ServicioIngresos;

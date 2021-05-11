@@ -40,31 +40,8 @@ public class Escenario {
 		this.conexiones = conexiones;
 	}
 	
-	/* Funcionalidad pasada a partida TD
-	//Pone en orden los jugadores para el turno
-	private ArrayList<String> ordenJugadores;
-	private byte jugadoractual, numeroderondas;
+	
 
-
-	public ArrayList<String> getOrdenJugadores() {
-		return ordenJugadores;
-	}
-	public void setOrdenJugadores(ArrayList<String> ordenJugadores) {
-		this.ordenJugadores = ordenJugadores;
-	}
-	public byte getJugadoractual() {
-		return jugadoractual;
-	}
-	public void setJugadoractual(byte jugadoractual) {
-		this.jugadoractual = jugadoractual;
-	}
-	public byte getNumeroderondas() {
-		return numeroderondas;
-	}
-	public void setNumeroderondas(byte numeroderondas) {
-		this.numeroderondas = numeroderondas;
-	}
-	*/
 	
 	
 }
