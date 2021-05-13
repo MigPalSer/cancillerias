@@ -68,5 +68,31 @@ public abstract class ModeloUnidad {
 		this.valorDefensa = valorDefensa;
 	}
 	
+	//Propiedades para ver si es un avion o se beneficia del bono de aviones (como la artilleria) en el combate terrestre
+	protected boolean aviacion, bonoAviacion;
+
+	public boolean isAviacion() {
+		return aviacion;
+	}
+
+	public void setAviacion(boolean aviacion) {
+		this.aviacion = aviacion;
+	}
+
+	public boolean isBonoAviacion() {
+		return bonoAviacion;
+	}
+
+	public void setBonoAviacion(boolean bonoAviacion) {
+		this.bonoAviacion = bonoAviacion;
+	}
+
+	//Constructor para declarar falsas las propiedades especiales de cualquier unidad.
+	public ModeloUnidad() {
+		super();
+		this.aviacion=false;
+		this.bonoAviacion=false;
+	}
+	
 	
 }

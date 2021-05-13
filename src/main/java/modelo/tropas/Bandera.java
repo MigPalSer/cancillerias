@@ -49,6 +49,15 @@ public class Bandera extends ColeccionTropas {
 		}
 		return infanterias;
 	}
+	public String toStringLog() {
+
+		String s="Bandera de "+propietario.getNombre()+" : ";
+		for(String str : tropas.keySet()) {
+			s+=str+" "+tropas.get(str)+" -/- ";
+		}
+		return s;
+		
+	}
 	
 
 	

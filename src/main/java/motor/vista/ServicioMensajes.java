@@ -43,7 +43,7 @@ public class ServicioMensajes {
 	public static void tropasQuePuedenReforzar(Territorio t, Jugador j) {
 		Bandera b = t.getTropas().get(j);
 		out("El territorio " + t.getNombre() + " puede reforzar con " + 
-		b.getInfanteria() + "/"	+ b.getArtilleria());
+		b.toStringLog()) ;
 	}
 
 	public static void tropasFinales(Territorio t, Jugador j) {
@@ -119,8 +119,7 @@ public class ServicioMensajes {
 					+ t.getPropietario().getNombre() + ", produccion " + t.getProduccion());
 			Collection<Bandera> banderas = t.getTropas().values();
 			for (Bandera b : banderas) {
-				out(b.getPropietario().getNombre() + " - " + b.getInfanteria() 
-						+ "/" + b.getArtilleria()+ "/" + b.get("carros"));
+				out(b.toStringLog());
 			}
 		}
 		out("********************************");

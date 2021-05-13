@@ -62,8 +62,11 @@ public class Partida implements Runnable {
 	void turno(Jugador j) {
 
 		//Produccion inicial
+		int hacerproduccion = j.getControlador().decidir("¿Producir? - TC: 0 no, 1 sí");
+
+		if (hacerproduccion >0) {
 		ProduccionJugador.produccion(j);
-		
+		}
 		ServicioMensajes.println(j.getCadena().toString());
 		
 		boolean turnoencurso = true;

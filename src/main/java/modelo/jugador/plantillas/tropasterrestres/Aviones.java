@@ -3,17 +3,17 @@ package modelo.jugador.plantillas.tropasterrestres;
 import modelo.jugador.plantillas.ModeloUnidad.Clasificacion;
 import modelo.tropas.ServicioColeccionTropas;
 
-public class Artilleria extends EquipoAbstracto {
+public class Aviones extends EquipoAbstracto {
 
 
-	public Artilleria() {
+	public Aviones() {
 		super();
-		tipo="artilleria";
+		tipo="aviones";
 		colaInicial=1; 
-		costeDinero=4;
-		valorAtaque=5; 
-		valorDefensa=6;
-		bonoAviacion=true;
+		costeDinero=10;
+		valorAtaque=8; 
+		valorDefensa=8;
+		aviacion=true;
 	}
 
 	
