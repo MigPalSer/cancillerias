@@ -14,6 +14,7 @@ public class Main1 {
 		
 		Partida p=FactoriaPartidas.crear(Partidas.ALFA1);
 		
+		
 		ServicioMensajes.addVista(new LogConsola());
 		
 		p.run();

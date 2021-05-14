@@ -1,6 +1,7 @@
 package modelo.tropas;
 
 import modelo.jugador.Jugador;
+import modelo.jugador.plantillas.ModeloUnidad;
 import modelo.jugador.plantillas.ModeloUnidad.Clasificacion;
 
 public class Bandera extends ColeccionTropas {
@@ -58,7 +59,21 @@ public class Bandera extends ColeccionTropas {
 		return s;
 		
 	}
+	public boolean tieneAviones() {
+		boolean aviones=false;
+		
+		for (String s : tropas.keySet()) {
+			if(tropas.get(s)>0&&getModelo(s).isAviacion()) {
+				aviones=true;
+			}
+		}
+		
+		return aviones;
+	}
 	
+	public ModeloUnidad getModelo(String s) {
+		return propietario.getModelo(s);
+	}
 
 	
 }

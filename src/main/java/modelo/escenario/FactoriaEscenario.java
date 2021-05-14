@@ -67,11 +67,13 @@ public class FactoriaEscenario {
 			Bandera bandera2=new Bandera(franceses);
 			bandera2.setInfanteria(5);
 			bandera2.set("carros", 5);
+			bandera2.set("aviones", 3);
 			e.getTerritorios().get(2).getTropas().put(franceses, bandera2);
 			
 			Bandera bandera3=new Bandera(alemanes);
 			bandera3.setInfanteria(10);
 			bandera3.setArtilleria(5);
+			bandera3.set("aviones", 3);
 			e.getTerritorios().get(3).getTropas().put(alemanes, bandera3);
 			
 			break;

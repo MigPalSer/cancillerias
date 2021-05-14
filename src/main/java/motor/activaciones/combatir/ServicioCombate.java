@@ -32,6 +32,10 @@ public class ServicioCombate {
 	//Consideramos por defecto que la bandera 1 es la que ataca y la b2 la que defiende
 	public static void combateTerrestre(Bandera banda_atacante, Bandera banda_defensora) {
 		
+		if(banda_atacante.tieneAviones()&&banda_defensora.tieneAviones()) {
+			combateAereo(banda_atacante, banda_defensora);
+		}
+		
 		//TODO implementar limitacion equipo
 		int infanteria_atacante=banda_atacante.numeroInfanterias();
 		int infanteria_defensora=banda_defensora.numeroInfanterias();
@@ -61,6 +65,45 @@ public class ServicioCombate {
 		ServicioDanho.asignacionImpactos(banda_defensora, impactos_al_defensor);
 	}
 	
+	public static void combateAereo(Bandera banda_atacante, Bandera banda_defensora) {
+
+		//El combate aereo modifica directamente los aviones de las bandas, son 3 rondas actualizando bajas
+		//y NO tiene supervivencia, se realiza en los combates terrestres si ambas bandas tienen aviones
+		
+		//TODO generalizar para que pueda haber otros tipos de aviones
+		int aviones_atacantes=banda_atacante.get("aviones");
+		int aviones_defensores=banda_defensora.get("aviones");
+		
+		int valor_atacantes=banda_atacante.getModelo("aviones").getValorAtaque();
+		int valor_defensores=banda_defensora.getModelo("aviones").getValorDefensa();
+		
+		ServicioMensajes.println("Combate aereo iniciado, los atacantes de "+banda_atacante.getPropietario().getNombre()+" con "+aviones_atacantes+" aviones, se enfrentan a los aviones defensores de "+
+		banda_defensora.getPropietario().getNombre()+" con "+aviones_defensores+" aviones");
+		
+		int rondas=0;
+		
+		do {
+			rondas++;
+			
+			//Lanzamos los impactos
+			int impactos_al_atacante=disparoTerreste(valor_defensores, aviones_defensores);
+			int impactos_al_defensor=disparoTerreste(valor_atacantes, aviones_atacantes);
+			
+			//Aplicamos las bajas o las situamos a 0 si han sobrepasado el número
+			aviones_atacantes=aviones_atacantes>impactos_al_atacante?aviones_atacantes-impactos_al_atacante:0;
+			aviones_defensores=aviones_defensores>impactos_al_defensor?aviones_defensores-impactos_al_defensor:0;
+			
+			//Se hace otra ronda si quedan aviones de ambos bandos y no se ha llegado a las 3 rondas
+		} while (aviones_atacantes>0&&aviones_defensores>0&&rondas<3);
+		
+		ServicioMensajes.println("Combate aereo de "+rondas+" rondas, los atacantes de "+banda_atacante.getPropietario().getNombre()+" mantienen "+aviones_atacantes+" aviones; los aviones defensores de "+
+		banda_defensora.getPropietario().getNombre()+" mantienen "+aviones_defensores+" aviones");
+		
+		//Actualizamos con los aviones supervivientes
+		banda_atacante.set("aviones", aviones_atacantes);
+		banda_defensora.set("aviones", aviones_defensores);
+	}
+
 	public static int calcularImpactosTotales(Bandera b, boolean atacante) {
 		int impactos=0;
 		for (String s : b.getTropas().keySet()) {
@@ -114,5 +157,7 @@ public class ServicioCombate {
 		}
 		return valor;
 	}
+	
+	
 	
 }

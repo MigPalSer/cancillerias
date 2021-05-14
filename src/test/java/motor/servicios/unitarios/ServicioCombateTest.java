@@ -55,7 +55,21 @@ class ServicioCombateTest {
 		assertThat(b2.getArtilleria(), equalTo(0));
 
 	}
+	
+	@Test
+	void testCombateAereo() {
+		Bandera ba1, ba2;
+		ba1=new Bandera(FactoriaJugador.createJugador(0, "1"));
+		ba2=new Bandera(FactoriaJugador.createJugador(0, "2"));
+		ba1.set("aviones", 5);
+		ba2.set("aviones", 3);
+		ServicioCombate.combateAereo(ba1, ba2);
+		assertThat(ba1.get("aviones"), equalTo(2));
+		assertThat(ba2.get("aviones"), equalTo(0));
+	}
 
+	
+	
 	@AfterEach
 	void tearDown() {
 		b1=null;
