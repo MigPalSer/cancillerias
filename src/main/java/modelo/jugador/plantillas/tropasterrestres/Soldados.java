@@ -3,15 +3,15 @@ package modelo.jugador.plantillas.tropasterrestres;
 import modelo.jugador.plantillas.ModeloUnidad.Clasificacion;
 import modelo.tropas.ServicioColeccionTropas;
 
-public class Reclutas extends InfanteriaAbstracta {
+public class Soldados extends InfanteriaAbstracta {
 
 
-	public Reclutas() {
+	public Soldados() {
 		super();
-		tipo="reclutas";
-		colaInicial=0; 
-		costeDinero=3;
-		valorAtaque=8; 
+		tipo="soldados";
+		colaInicial=1; 
+		costeDinero=4;
+		valorAtaque=7; 
 		valorDefensa=6;
 	}
 
@@ -24,7 +24,7 @@ public class Reclutas extends InfanteriaAbstracta {
 
 	@Override
 	public String mejora() {
-		return "soldados";
+		return "veteranos";
 	}
 
 

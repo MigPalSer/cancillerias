@@ -7,6 +7,8 @@ import modelo.jugador.plantillas.tropasterrestres.Artilleria;
 import modelo.jugador.plantillas.tropasterrestres.Aviones;
 import modelo.jugador.plantillas.tropasterrestres.Carros;
 import modelo.jugador.plantillas.tropasterrestres.Reclutas;
+import modelo.jugador.plantillas.tropasterrestres.Soldados;
+import modelo.jugador.plantillas.tropasterrestres.Veteranos;
 
 public class FactoriaPlantillaProduccion {
 
@@ -22,6 +24,8 @@ public class FactoriaPlantillaProduccion {
 			pp.getOpciones().add(new Artilleria());
 			pp.getOpciones().add(new Carros());
 			pp.getOpciones().add(new Aviones());
+			pp.getOpciones().add(new Soldados());
+			pp.getOpciones().add(new Veteranos());
 
 		}
 		

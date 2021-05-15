@@ -10,7 +10,7 @@ import modelo.tropas.Bandera;
 public class FactoriaTerritorio {
 
 	public enum Terrenos{
-		PARIS(4, 1, 3, 1), BRUSELAS(2, 2, 1, 0), RENANIA(6, 3, 3, 2);
+		PARIS(4, 1, 3, 1), BRUSELAS(2, 2, 1, 0), RENANIA(6, 3, 3, 2), ALSACIA(4, 4, 1, 2), SAJONIA(3, 5, 2, 1);
 		private int produccion, id, soldadesca, fabricas;
 		private Terrenos(int a, int b, int c, int d) {
 			produccion=a;

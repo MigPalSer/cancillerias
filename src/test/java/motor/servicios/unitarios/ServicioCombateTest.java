@@ -50,11 +50,45 @@ class ServicioCombateTest {
 	@Test
 	void testCombate() {
 		ServicioCombate.combateTerrestre(b1, b2);
-		assertThat(b1.getInfanteria(), equalTo(3));
+		assertThat(b1.getInfanteria()+b1.get("soldados")+b1.get("veteranos"), equalTo(3));
 		assertThat(b2.getInfanteria(), equalTo(0));
 		assertThat(b2.getArtilleria(), equalTo(0));
 
 	}
+	
+	@Test
+	void testExcesoEquipos() {
+		Bandera banderaexceso=new Bandera(FactoriaJugador.createJugador("dummy"));
+		banderaexceso.setInfanteria(1);
+		banderaexceso.setArtilleria(20);
+		int impactos=
+		ServicioCombate.calcularImpactosTotales(banderaexceso, false);
+		
+		assertThat(impactos, equalTo(2));
+
+	}
+	
+	@Test
+	void testNumeroImpactos() {
+		
+		int impactos_al_atacante=ServicioCombate.calcularImpactosTotales(b2, false);
+		int impactos_al_defensor=ServicioCombate.calcularImpactosTotales(b1, true);
+		
+		assertThat(impactos_al_atacante, equalTo(7));
+		assertThat(impactos_al_defensor, equalTo(10));
+	
+
+	}
+	
+	@Test
+	void sinAviones() {
+		
+		assertFalse(b1.tieneAviones());
+		assertFalse(b2.tieneAviones());
+
+	}
+	
+
 	
 	@Test
 	void testCombateAereo() {

@@ -9,6 +9,6 @@ public abstract class InfanteriaAbstracta extends ModeloUnidad {
 		clasificacion=Clasificacion.TERRESTRE_INFANTERIA;
 	}
 
-	
+
 
 }

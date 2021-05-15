@@ -9,6 +9,12 @@ public abstract class EquipoAbstracto extends ModeloUnidad {
 		clasificacion=Clasificacion.TERRESTRE_EQUIPO;
 	}
 
+	public String mejora() {
+		return null;
+	};
 	
+	public boolean puedeMejorar() {
+		return false;
+	}
 
 }

@@ -94,5 +94,38 @@ public abstract class ModeloUnidad {
 		this.bonoAviacion=false;
 	}
 	
+	public abstract String mejora();
+	
+	public abstract boolean puedeMejorar();
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((clasificacion == null) ? 0 : clasificacion.hashCode());
+		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ModeloUnidad other = (ModeloUnidad) obj;
+		if (clasificacion != other.clasificacion)
+			return false;
+		if (tipo == null) {
+			if (other.tipo != null)
+				return false;
+		} else if (!tipo.equals(other.tipo))
+			return false;
+		return true;
+	}
+	
+	
 	
 }

@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 
 import modelo.jugador.Jugador;
 import modelo.jugador.plantillas.TablaValores;
+import modelo.jugador.plantillas.ModeloUnidad.Clasificacion;
 import modelo.territorio.Territorio;
 import modelo.tropas.Bandera;
 import motor.dado.Dado;
@@ -38,22 +39,7 @@ public class ServicioCombate {
 		
 		//TODO implementar limitacion equipo
 		int infanteria_atacante=banda_atacante.numeroInfanterias();
-		int infanteria_defensora=banda_defensora.numeroInfanterias();
-		
-		/*HashMap<String, Integer> tropasatacantes=banda_atacante.getTropas();
-		HashMap<String, Integer> tropasdefensoras=banda_defensora.getTropas();
-		
-		for (String s : tropasatacantes.keySet()) {
-			int numero=tropasatacantes.get(s);
-			if(numero>0)impactos_al_defensor+=disparoTerrestre(s, numero, true);
-		}
-		
-		for (String s : tropasdefensoras.keySet()) {
-			int numero=tropasdefensoras.get(s);
-			if(numero>0)impactos_al_atacante+=disparoTerrestre(s, numero, false);
-		}
-		*/
-		
+		int infanteria_defensora=banda_defensora.numeroInfanterias();		
 
 		int impactos_al_atacante=calcularImpactosTotales(banda_defensora, false);
 		int impactos_al_defensor=calcularImpactosTotales(banda_atacante, true);
@@ -63,6 +49,9 @@ public class ServicioCombate {
 
 		ServicioDanho.asignacionImpactos(banda_atacante, impactos_al_atacante);
 		ServicioDanho.asignacionImpactos(banda_defensora, impactos_al_defensor);
+		
+		banda_atacante.mejorarTropas(numeroMejoras(infanteria_defensora));
+		banda_defensora.mejorarTropas(numeroMejoras(infanteria_atacante));
 	}
 	
 	public static void combateAereo(Bandera banda_atacante, Bandera banda_defensora) {
@@ -108,8 +97,12 @@ public class ServicioCombate {
 		int impactos=0;
 		for (String s : b.getTropas().keySet()) {
 			int numero=b.get(s);
-			int valor=obtenerValorAtaque(b, s, atacante);
-			if(numero>0)impactos+=disparoTerreste(valor, numero);
+			if(numero>0) {
+				//Reduccion del número de equipos que intervienen, maximo por infanterias
+			if(b.getModelo(s).getClasificacion().equals(Clasificacion.TERRESTRE_EQUIPO))numero=b.numeroInfanterias()>=numero?numero:b.numeroInfanterias();	
+			
+			int valor=b.obtenerValorAtaque(s, atacante);
+			impactos+=disparoTerreste(valor, numero);}
 		}
 		
 		return impactos;
@@ -148,16 +141,18 @@ public class ServicioCombate {
 		return disparoTerreste(valor, numero, dado);
 	}
 	
-	public static int obtenerValorAtaque(Bandera b, String tipo, boolean atacante) {
-		int valor=9;
-		if(atacante) {
-			valor=b.getPropietario().getModelo(tipo).getValorAtaque();
-		}else {
-			valor=b.getPropietario().getModelo(tipo).getValorDefensa();
+	
+	
+	public static int numeroMejoras(int n) {
+		//TORE
+		ServicioMensajes.println("intentamos mejorar "+n);
+		int mejoras=0;
+		for (int i = 0; i < n; i++) {
+			if(dado.tira(8))mejoras++;
 		}
-		return valor;
+		//TORE
+		ServicioMensajes.println("mejoramos "+mejoras);
+		return mejoras;
 	}
-	
-	
 	
 }

@@ -1,8 +1,15 @@
 package modelo.tropas;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 import modelo.jugador.Jugador;
 import modelo.jugador.plantillas.ModeloUnidad;
 import modelo.jugador.plantillas.ModeloUnidad.Clasificacion;
+import modelo.jugador.plantillas.tropasterrestres.InfanteriaAbstracta;
+import motor.vista.ServicioMensajes;
 
 public class Bandera extends ColeccionTropas {
 
@@ -75,5 +82,61 @@ public class Bandera extends ColeccionTropas {
 		return propietario.getModelo(s);
 	}
 
+	//Mejorar tropas de cualquier tipo
+	public void mejorarTropas(int n) {
 	
+		while(n>0&&isMejorable()) {
+			n--;
+			
+			//Hacemos un barajado de las tropas de la bandera para elegir una mejorable al azar
+			//Al tener la condicion isMejorable nos aseguramos que al menos una cumpla
+			List<String> tropasString=ServicioColeccionTropas.toStringList(this);
+			Collections.shuffle(tropasString);
+			
+			Optional<String> str=tropasString.stream().
+			map(this::getModelo).
+			filter((m)->m.puedeMejorar()).
+			map((m)->m.getTipo()).
+			findFirst();
+			
+			asciendeUnidad(str.get());
+			
+			
+		}}
+	
+	
+	//Método responsable de quitar uno de s y añadir uno de su mejora
+	//NO es responsable de verificar que sea mejorable ni de que haya al menos uno que mejorar
+	public void asciendeUnidad(String s) {
+		String mejora=getModelo(s).mejora();
+		ServicioColeccionTropas.aumentar(this, 1, mejora);
+		ServicioColeccionTropas.reducir(this, 1, s);
+	}
+	
+	//Devuelve verdadero si hay alguna tropa que se pueda mejorar
+	public boolean isMejorable() {
+		boolean hayTropasMejorables=false;		
+		for (String s : tropas.keySet()) {
+			if(tropas.get(s)>0&&getModelo(s).puedeMejorar()){
+				hayTropasMejorables=true;
+			}
+		}
+		return hayTropasMejorables;
+	}
+	
+	public int obtenerValorAtaque(String tipo, boolean atacante) {
+		int valor=9;
+		ModeloUnidad modelo=getModelo(tipo);
+		if(atacante) {
+			valor=modelo.getValorAtaque();
+		}else {
+			valor=modelo.getValorDefensa();
+		}
+		if(modelo.isBonoAviacion()&&this.tieneAviones())valor--;
+		return valor;
+	}
+	
+	public Set<String> setTropas(){
+		return tropas.keySet();
+	}
 }

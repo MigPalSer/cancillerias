@@ -12,7 +12,7 @@ public class Main1 {
 
 		System.out.println("Nueva partida");
 		
-		Partida p=FactoriaPartidas.crear(Partidas.ALFA1);
+		Partida p=FactoriaPartidas.crear(Partidas.ALFA2);
 		
 		
 		ServicioMensajes.addVista(new LogConsola());
