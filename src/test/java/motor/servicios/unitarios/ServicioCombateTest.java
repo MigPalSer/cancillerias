@@ -102,6 +102,19 @@ class ServicioCombateTest {
 		assertThat(ba2.get("aviones"), equalTo(0));
 	}
 
+	@Test
+	void testCapturaEquipo() {
+		Bandera ba1, ba2;
+		ba1=new Bandera(FactoriaJugador.createJugador(0, "1"));
+		ba2=new Bandera(FactoriaJugador.createJugador(0, "2"));
+		ba1.set("aviones", 5);
+		ba2.set("reclutas", 3);
+		ServicioCombate.capturarEquipo(ba1, ba2);
+		assertThat(ba1.get("aviones"), equalTo(0));
+		assertThat(ba2.get("aviones"), equalTo(5));
+		assertThat(ba2.get("reclutas"), equalTo(3));
+
+	}
 	
 	
 	@AfterEach

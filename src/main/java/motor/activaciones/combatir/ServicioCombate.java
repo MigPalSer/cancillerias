@@ -9,6 +9,7 @@ import modelo.jugador.plantillas.TablaValores;
 import modelo.jugador.plantillas.ModeloUnidad.Clasificacion;
 import modelo.territorio.Territorio;
 import modelo.tropas.Bandera;
+import modelo.tropas.ServicioColeccionTropas;
 import motor.dado.Dado;
 import motor.dado.Dado8;
 import motor.partida.ServicioTerritorios;
@@ -91,6 +92,20 @@ public class ServicioCombate {
 		//Actualizamos con los aviones supervivientes
 		banda_atacante.set("aviones", aviones_atacantes);
 		banda_defensora.set("aviones", aviones_defensores);
+		
+		capturarEquipo(banda_atacante, banda_defensora);
+	}
+
+	//Este método se utiliza para que si una bandera se ha quedado sin infanterias pero la otra aún tiene (tras el combate) logre capturar todas las piezas de equipo
+	public static void capturarEquipo(Bandera banda_atacante, Bandera banda_defensora) {
+		int infa=banda_atacante.numeroInfanterias();
+		int infd=banda_defensora.numeroInfanterias();
+		if(infa!=0&&infd==0) {
+			ServicioColeccionTropas.transferirTodo(banda_defensora, banda_atacante);
+		}else if(infa==0&&infd!=0) {
+			ServicioColeccionTropas.transferirTodo(banda_atacante, banda_defensora);
+		}
+		
 	}
 
 	public static int calcularImpactosTotales(Bandera b, boolean atacante) {
