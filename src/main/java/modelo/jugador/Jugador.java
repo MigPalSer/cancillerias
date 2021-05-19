@@ -1,5 +1,6 @@
 package modelo.jugador;
 
+import modelo.jugador.alianza.Alianza;
 import modelo.jugador.plantillas.FactoriaPlantillaProduccion;
 import modelo.jugador.plantillas.PlantillaProduccion;
 import modelo.jugador.plantillas.TablaValores;
@@ -19,7 +20,28 @@ public class Jugador {
 	Decision controlador;
 	CadenaProduccion cadena;
 	PlantillaProduccion plantilla_produccion;
+	Alianza alianza;
 	
+	//Permite saber si el jugador pertenece a alguna alianza normal
+	public boolean isAliado() {
+		return alianza==null?false:true;
+	}
+	
+	//Devuelve el tag de la alianza, en caso de no tener, devuelve su nombre como tag
+	public String getTagAlianza() {
+		return alianza==null?this.nombre:alianza.getTag();
+	}
+	
+	public Alianza getAlianza() {
+		return alianza;
+	}
+	
+	//Automáticamente se va de la alianza y se incorpora a la nueva
+	public void setAlianza(Alianza alianza) {
+		if(alianza!=null)alianza.getIntegrantes().remove(this);
+		this.alianza = alianza;
+		if(alianza!=null)alianza.getIntegrantes().add(this);
+	}
 	public PlantillaProduccion getPlantillaProduccion() {
 		return plantilla_produccion;
 	}

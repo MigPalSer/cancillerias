@@ -32,7 +32,7 @@ public class ServicioCombate {
 	}
 
 	//Consideramos por defecto que la bandera 1 es la que ataca y la b2 la que defiende
-	public static void combateTerrestre(Bandera banda_atacante, Bandera banda_defensora) {
+	public static void combateTerrestre1a1(Bandera banda_atacante, Bandera banda_defensora) {
 		
 		if(banda_atacante.tieneAviones()&&banda_defensora.tieneAviones()) {
 			combateAereo(banda_atacante, banda_defensora);

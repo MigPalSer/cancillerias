@@ -49,7 +49,7 @@ class ServicioCombateTest {
 	
 	@Test
 	void testCombate() {
-		ServicioCombate.combateTerrestre(b1, b2);
+		ServicioCombate.combateTerrestre1a1(b1, b2);
 		assertThat(b1.getInfanteria()+b1.get("soldados")+b1.get("veteranos"), equalTo(3));
 		assertThat(b2.getInfanteria(), equalTo(0));
 		assertThat(b2.getArtilleria(), equalTo(0));

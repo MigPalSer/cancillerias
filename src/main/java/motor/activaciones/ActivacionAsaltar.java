@@ -41,7 +41,7 @@ public class ActivacionAsaltar extends Activacion {
 				ServicioTerritorios.actualizaDisputa(t);
 				if(t.isDisputado()) {
 					Bandera banderaenemiga=ServicioEnemigos.tropasEnemigas(t, j);
-					ServicioCombate.combateTerrestre(banderadestino, banderaenemiga);
+					ServicioCombate.combateTerrestre1a1(banderadestino, banderaenemiga);
 				}
 				
 				//Actualizar territorio
