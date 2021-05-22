@@ -22,7 +22,30 @@ public class ServicioActivaciones {
 	 *Si hay dos alianzas se ve si se hace combate múltiple o simple
 	 *Si hay tres o más alianzas se elige a quien se ataca y se va al efecto de 2 alianzas*/
 	public static void SelectorCombateTerrestre(Jugador j, Territorio t) {
-		//TODO
+		//Descartamos el combate si la bandera del jugador está vacía
+		if(!t.getTropas().get(j).isVacia()) {
+			
+			long banderas=contarBanderas(t);
+			long alianzas=contarAlianzas(t);
+			
+			//TODO
+		}
+	}
+	
+	public static long contarBanderas(Territorio t) {
+		return t.getTropas().values().stream()
+				.filter(b->!b.isVacia())
+				.count();
+	}
+	
+	public static Long contarAlianzas(Territorio t) {
+		return t.getTropas().values().stream()
+				.filter(b->!b.isVacia())				
+				.map(b->b.getPropietario().getTagAlianza())
+				.sorted()
+				.distinct()
+				.count();
+
 	}
 	
 }
