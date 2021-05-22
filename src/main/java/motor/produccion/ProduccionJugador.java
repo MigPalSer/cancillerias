@@ -33,9 +33,9 @@ public class ProduccionJugador {
 			int cantidad=j.getControlador().decidir("producir");
 			int precio=cantidad*coste;
 			//Si tenemos dinero para pagarlo activa la compra, si no da un mensaje de fallo
-			if(precio<=j.getDinero()) {
+			if(j.puedeGastar(precio)) {
 				//Hacemos que el jugador pague lo que ha consumido
-				ServicioJugador.gastar(j, precio);
+				j.gastar(precio);
 				//Elegimos la cola correspondiente
 				SeccionCadena cola=selectorCola(j, opc.getColaInicial());
 				//Lo añadimos a la cola

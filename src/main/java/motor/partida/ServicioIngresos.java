@@ -17,7 +17,7 @@ public class ServicioIngresos {
 			}
 		}
 		
-		ServicioJugador.ingresar(j, dinero);;
+		j.ingresar(dinero);
 	}
 	
 }

@@ -23,7 +23,7 @@ public class Jugador {
 	Alianza alianza;
 	
 	//Permite saber si el jugador pertenece a alguna alianza normal
-	public boolean isAliado() {
+	public boolean haveAliance() {
 		return alianza==null?false:true;
 	}
 	
@@ -38,10 +38,11 @@ public class Jugador {
 	
 	//Automáticamente se va de la alianza y se incorpora a la nueva
 	public void setAlianza(Alianza alianza) {
-		if(alianza!=null)alianza.getIntegrantes().remove(this);
+		if(alianza!=null)alianza.remove(this);
 		this.alianza = alianza;
-		if(alianza!=null)alianza.getIntegrantes().add(this);
+		if(alianza!=null)alianza.add(this);
 	}
+	
 	public PlantillaProduccion getPlantillaProduccion() {
 		return plantilla_produccion;
 	}
@@ -113,4 +114,17 @@ public class Jugador {
 		return plantilla_produccion.get(s);
 	}
 	
+	public void ingresar(int ganancia) {
+		this.dinero+=ganancia;
+	}
+	
+	//No es responsable de evitar que el saldo sea negativo
+	public void gastar(int gasto) {
+			this.dinero-=gasto;
+		}
+	
+	//Método encargado de ver si un jugador tiene dinero suficiente para pagar algo
+	public boolean puedeGastar(int precio) {
+		return this.dinero>=precio;
+	}
 }

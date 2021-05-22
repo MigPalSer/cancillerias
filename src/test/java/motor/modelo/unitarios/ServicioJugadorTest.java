@@ -23,16 +23,16 @@ class ServicioJugadorTest {
 	@Test
 	void testIngresar() {
 		j1.setDinero(10);
-		ServicioJugador.ingresar(j1, 10);
+		j1.ingresar(10);
 		assertThat(j1.getDinero(), equalTo(20));
 	}
 	
 	@Test
 	void testGastar() {
 		j1.setDinero(10);
-		ServicioJugador.gastar(j1, 10);
+		j1.gastar(10);
 		assertThat(j1.getDinero(), equalTo(0));
-		ServicioJugador.gastar(j1, 10);
+		j1.gastar(10);
 		assertThat(j1.getDinero(), equalTo(-10));
 	}
 	

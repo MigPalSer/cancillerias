@@ -35,7 +35,7 @@ public class ServicioDanho {
 		*/
 		ColeccionTropas bajas=tropasImpactadas(b, impactos);
 		
-		ServicioColeccionTropas.retirarTodo(b, bajas);
+		ServicioColeccionTropas.clonarYRetirarTodo(b, bajas);
 		
 		/*Para cada tipo de baja a continuación utilizaremos los métodos asociados al tipo de
 		 * tropa y jugador para ver a donde van, las tropas que resistan impactos son reincorporadas
@@ -56,7 +56,7 @@ public class ServicioDanho {
 		ColeccionTropas bajas=new ColeccionTropas();
 		//Clonamos las tropas de la bandera en las bajas, luego le iremos quitando en función
 		//De la diferencia entre los impactos y el tamaño
-		ServicioColeccionTropas.aumentarTodo(b, bajas);
+		ServicioColeccionTropas.clonarYAumentarTodo(b, bajas);
 
 		int tamanhoBandera=0;
 		for (Integer integer : b.getTropas().values()) {

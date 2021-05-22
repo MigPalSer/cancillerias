@@ -63,4 +63,16 @@ public class ColeccionTropas {
 		return s;
 	}
 	
+	public void aumentar(int cantidad, String tipo) {
+		int tropasfinales=cantidad+this.get(tipo);
+		this.set(tipo, tropasfinales);
+	}
+	
+	//Sí asegura que ningun tipo de tropa quede en negativo
+	public void reducir(int cantidad, String tipo) {
+		int tropasfinales=this.get(tipo)-cantidad;
+		if(tropasfinales<0)tropasfinales=0;
+		this.set(tipo, tropasfinales);
+	}
+	
 }

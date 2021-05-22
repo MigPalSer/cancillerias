@@ -30,6 +30,13 @@ public class Alianza {
 		this.tag = tag;
 		integrantes=new HashSet<Jugador>();
 	}
+	public boolean add(Jugador e) {
+		return integrantes.add(e);
+	}
+	
+	public boolean remove(Jugador o) {
+		return integrantes.remove(o);
+	}
 	
 	
 	

@@ -36,50 +36,19 @@ public class ServicioColeccionTropas {
 	
 	}
 
+	//TODO Refactorizar referencias y sustituir por el método propio de colecciontropas
 	public static void aumentar(ColeccionTropas tropa, int cantidad, String tipo) {
-		int tropasfinales=cantidad+tropa.get(tipo);
-		tropa.set(tipo, tropasfinales);
+		tropa.aumentar(cantidad, tipo);
 	}
 	
+	//TODO Refactorizar referencias y sustituir por el método propio de colecciontropas
 	public static void reducir(ColeccionTropas tropa, int cantidad, String tipo) {
-		int tropasfinales=tropa.get(tipo)-cantidad;
-		if(tropasfinales<0)tropasfinales=0;
-		tropa.set(tipo, tropasfinales);
+		tropa.reducir(cantidad, tipo);
 	}
 	
-	/*
-	
-	public static boolean esInfanteria(String s) {
-		boolean infanteria=false;
-		
-		switch (s) {
-		case "infanteria":
-			infanteria=true;
-			break;
 
-		default:
-			break;
-		}
-		return infanteria;
-	}
-	
-	public static boolean esEquipo(String s) {
-		boolean equipo=false;
-		
-		switch (s) {
-		case "artilleria":
-		case "carros":
-			equipo=true;
-			break;
-
-		default:
-			break;
-		}
-		return equipo;
-	}
-*/
-
-public static void aumentarTodo(ColeccionTropas emisor, ColeccionTropas receptor) {
+	//TODO Unificar el estilo con el anterior
+	public static void clonarYAumentarTodo(ColeccionTropas emisor, ColeccionTropas receptor) {
 		
 	//CUIDADO, con este método no retiramos las tropas del emisor, sino que las añadimos "clonadas" al receptor
 
@@ -96,7 +65,7 @@ public static void aumentarTodo(ColeccionTropas emisor, ColeccionTropas receptor
 	
 	}
 	
-	public static void retirarTodo(ColeccionTropas original, ColeccionTropas reduccion) {
+	public static void clonarYRetirarTodo(ColeccionTropas original, ColeccionTropas reduccion) {
 	//Cuidado!, con este método no reducimos las tropas de la reduccion, solo las de la original
 		
 		HashMap<String, Integer> tropasareducir=reduccion.getTropas();
@@ -132,13 +101,21 @@ public static void aumentarTodo(ColeccionTropas emisor, ColeccionTropas receptor
 	
 public static String supervivenciaEstandar(int tirada_supervivencia) {
 		
+		//Aseguramos un bono máximo de +4 en las tiradas
+		if(tirada_supervivencia>12)tirada_supervivencia=12;
+	
 		String respuesta="";
 		
 			switch (tirada_supervivencia) {
 			case 8:
+			case 10:
+			case 11:
 				respuesta="cola+2";
 				break;
-
+			case 9:
+			case 12:
+				respuesta="impactoanulado";
+				break;
 			default:
 				break;
 			
@@ -149,20 +126,27 @@ public static String supervivenciaEstandar(int tirada_supervivencia) {
 	
 public static String supervivenciaCarros(int tirada_supervivencia) {
 	
+	//Aseguramos un bono máximo de +4 en las tiradas
+	if(tirada_supervivencia>12)tirada_supervivencia=12;
+	
 	String respuesta="";
 	
 	
 		switch (tirada_supervivencia) {
 		case 3:
 		case 4:
+		case 9:
 			respuesta="cola+2";
 			break;
 		case 5:
 		case 6:
+		case 10:
+		case 11:
 			respuesta="cola+1";
 			break;
 		case 7:
 		case 8:
+		case 12:
 			respuesta="impactoanulado";
 			break;
 		default:
@@ -173,7 +157,7 @@ public static String supervivenciaCarros(int tirada_supervivencia) {
 	return respuesta;
 }
 
-	
+	//TODO Modificar los test de estos dos y eliminar
 	@Deprecated
 	public static void transferir(Bandera origen, Bandera destino, int envioinfanterias, int envioartillerias) {
 	
