@@ -20,6 +20,8 @@ public class ActivacionAsaltar extends Activacion {
 	
 	public void activar(Escenario e, Jugador j, int idterritorio) {
 		
+			/////////////////MOVIMIENTO////////////////
+		
 				//Traemos el territorio activado
 				Territorio t=e.getTerritorios().get(idterritorio);
 				
@@ -35,7 +37,8 @@ public class ActivacionAsaltar extends Activacion {
 				
 				//Realiza las decisiones de reforzar
 				ServicioMovimientos.ReforzarDesdeTerritoriosDeOrigen(ts, j, banderadestino);
-				
+
+			//////////////////COMBATE//////////////////////	
 				//Definir enemigos, solo se instanciará si hay combate
 				//Combatir
 				ServicioTerritorios.actualizaDisputa(t);
@@ -44,53 +47,14 @@ public class ActivacionAsaltar extends Activacion {
 					ServicioCombate.combateTerrestre1a1(banderadestino, banderaenemiga);
 				}
 				
+				///////////ACTUALIZACIÓN Y MENSAJES////////////////////
+				
 				//Actualizar territorio
 				ServicioTerritorios.actualizaTerritorio(t, j);
 
 				//Pasa por consola el estado final
 				ServicioMensajes.tropasContendientes(t);
-				/*
 		
-		Territorio campodebatalla=e.getTerritorios().get(idterritorio);
-		
-		HashSet<Territorio> ts=ServicioConexiones.territoriosConectados(e, e.getTerritorios().get(idterritorio), 1);
-		
-		if(!e.getTerritorios().get(idterritorio).getTropas().containsKey(j)) {
-			e.getTerritorios().get(idterritorio).getTropas().put(j, new Bandera(j));
-		}
-		
-		Bandera banderadestino=e.getTerritorios().get(idterritorio).getTropas().get(j);
-		
-		HashSet<Territorio> tr=new HashSet<Territorio>();
-		for (Territorio territorio : ts) {
-			if(territorio.isActivado()) {
-				tr.add(territorio);
-			}
-			else if(!territorio.isDisputado()&&!territorio.getPropietario().equals(j)) {
-				tr.add(territorio);
-			}
-		}
-		ts.removeAll(tr);
-		
-		for (Territorio territorio : ts) {
-			if(territorio.getTropas().containsKey(j)) {
-			ServicioMensajes.tropasQuePuedenReforzar(territorio, j);
-			int inf=j.getControlador().decidir("Cuánta infanteria");
-			int art=j.getControlador().decidir("Cuánta artilleria");
-			Bandera banderaorigen=territorio.getTropas().get(j);
-			ServicioBanderas.transferir(banderaorigen, banderadestino, inf, art);
-			}
-		}
-		if(campodebatalla.getTropas().containsKey(campodebatalla.getPropietario())){
-		Bandera banderaenemiga=campodebatalla.getTropas().get(campodebatalla.getPropietario());
-		
-		ServicioCombate.combatir(banderadestino, banderaenemiga);
-		}
-		
-		ServicioTerritorios.actualizaTerritorio(campodebatalla, j);
-		
-		ServicioMensajes.tropasContendientes(e.getTerritorios().get(idterritorio));
-		*/
 	}
 
 }

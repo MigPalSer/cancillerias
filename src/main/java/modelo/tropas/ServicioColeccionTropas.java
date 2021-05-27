@@ -3,9 +3,11 @@ package modelo.tropas;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 import modelo.jugador.Jugador;
 import modelo.territorio.Territorio;
+import motor.dado.Dado;
 
 public class ServicioColeccionTropas {
 
@@ -37,11 +39,14 @@ public class ServicioColeccionTropas {
 	}
 
 	//TODO Refactorizar referencias y sustituir por el método propio de colecciontropas
+	@Deprecated
 	public static void aumentar(ColeccionTropas tropa, int cantidad, String tipo) {
 		tropa.aumentar(cantidad, tipo);
 	}
 	
+	
 	//TODO Refactorizar referencias y sustituir por el método propio de colecciontropas
+	@Deprecated
 	public static void reducir(ColeccionTropas tropa, int cantidad, String tipo) {
 		tropa.reducir(cantidad, tipo);
 	}
@@ -79,23 +84,12 @@ public class ServicioColeccionTropas {
 		
 	}
 	
+	//TODO sustituir
 	//Devuelve un array de strings con los strings repetidos segun su proporcion
+	@Deprecated
 	public static List<String> toStringList(ColeccionTropas ct) {
 		
-		ArrayList<String> lista=new ArrayList<String>();
-		
-		HashMap<String, Integer> tropas=ct.getTropas();
-		
-		//Recorremos con dos bucles anidados para generar una entrada por cada tropa
-		for (String string : tropas.keySet()) {
-			
-			for (int i = 0; i < tropas.get(string); i++) {
-				lista.add(string);
-			}
-			
-		}
-		
-		return lista;
+		return ct.toStringList();
 	}
 
 	
@@ -187,6 +181,59 @@ public static String supervivenciaCarros(int tirada_supervivencia) {
 		t.getTropas().get(j).setArtilleria(nuevasart);
 	}
 	
-	
+	//Reparte una cantidad de algo, como impactos, en función del número de unidades, hasta un máximo de 1 por unidad.
+	public static HashMap<Bandera, Integer> asignarAlAzarBanderasSegunUnidades
+	(Dado dado, int cantidad, Set<Bandera> banderas){
+		
+		//Este método es más feo y chapucero que pegar a un padre con un calcetín sudao
+		//Cambiar un día que esté más despejado //TODO
+		
+		HashMap<Bandera, Integer> mapa_unidades=new HashMap<Bandera, Integer>();		
+		final HashMap<Bandera, Integer> mapa_asignaciones=new HashMap<Bandera, Integer>();
+		HashMap<Integer, Bandera> mapa_orden=new HashMap<Integer, Bandera>();
+		//Chapuza para que no se estropee el ministream de ir asignando los órdenes. lo quitamos después
+		mapa_orden.put(0, null);
+		
+			banderas.stream().forEach(b->{
+			mapa_unidades.put(b, b.size());			
+			mapa_asignaciones.put(b, 0);
+			int orden_banderas=mapa_orden.keySet().stream().mapToInt(j->j).max().getAsInt()+1;
+			mapa_orden.put(orden_banderas, b);
+		});
+		
+			mapa_orden.remove(0, null);
+		
+		int total=mapa_unidades.values().stream().mapToInt(i->i).sum();
+		
+		if(cantidad>=total) {
+		mapa_asignaciones.clear();
+		mapa_asignaciones.putAll(mapa_unidades);
+		}else {
+		int actual=total;
+		for (int j = 0; j < cantidad; j++) {
+			int resultado=dado.generaIndice(actual);
+			
+			boolean asignado=false;
+			int indice=1;
+			do {
+				Bandera band=mapa_orden.get(indice);
+				int tamanho=mapa_unidades.get(band);
+				if(tamanho>=resultado) {
+					asignado=true;
+					int nuevasunidades=mapa_unidades.get(band)-1;
+					mapa_unidades.put(band, nuevasunidades);
+					int nuevasasignaciones=mapa_asignaciones.get(band)+1;
+					mapa_asignaciones.put(band, nuevasasignaciones);
+				}else {
+					resultado-=tamanho;
+				indice++;
+				}
+			} while (!asignado);
+			
+			actual--;
+		}
+		}
+		return mapa_asignaciones;
+	}
 	
 }

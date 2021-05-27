@@ -124,7 +124,7 @@ public class Bandera extends ColeccionTropas {
 		return hayTropasMejorables;
 	}
 	
-	public int obtenerValorAtaque(String tipo, boolean atacante) {
+	public int getValorAtaque(String tipo, boolean atacante) {
 		int valor=9;
 		ModeloUnidad modelo=getModelo(tipo);
 		if(atacante) {
@@ -138,5 +138,15 @@ public class Bandera extends ColeccionTropas {
 	
 	public Set<String> setTropas(){
 		return tropas.keySet();
+	}
+	
+	//Devuelve el número de tropas de tierra en la bandera
+	public int size() {
+		int unidades=0;
+		for (String s : tropas.keySet()) {
+			//Dependencia de la plantilla, pero bueno
+			if(propietario.getModelo(s).getClasificacion()==Clasificacion.TERRESTRE_INFANTERIA||this.getModelo(s).getClasificacion()==Clasificacion.TERRESTRE_EQUIPO)unidades+=tropas.get(s);
+		}
+		return unidades;
 	}
 }

@@ -12,36 +12,9 @@ import modelo.tropas.cadena.SeccionCadena;
 import motor.vista.ServicioMensajes;
 
 public class ServicioDespliegue {
-	/*
-	//Su responsabilidad es manejar la economia de cada jugador e interactuar con serviciodespliegue
 	
-	static int costeinfanteria, costeartilleria, costefabrica;
 	
-	//Declaracion de los costes de las tropas
-	static {
-		costeinfanteria=3;
-		costeartilleria=4;
-	}
-	
-	static public boolean puedePagar(Jugador j, int infanteria, int artilleria) {
-		return j.getDinero()>=((infanteria*costeinfanteria)+(artilleria*costeartilleria));
-	}
-	
-	static public void producir(Jugador j, Territorio t, int infanteria, int artilleria) {
-		
-		if(puedePagar(j, infanteria, artilleria)&&t.getPropietario().equals(j)&&infanteria<=t.getSoldadesca()) {
-			int dinero=j.getDinero();
-			int coste=(infanteria*costeinfanteria)+(artilleria*costeartilleria);
-			j.setDinero(dinero-coste);
-			
-			ServicioBanderas.desplegar(j, t, infanteria, artilleria);
-				
-		}else {
-			//ServicioMensajes.alerta("La producción no tuvo lugar");
-		}
-	}
-	*/
-	
+	//Método que gestiona toda la compra y despliegue de unidades
 	static public void despliegue(Jugador j, Territorio t) {
 		
 		//Extraemos las capacidades máximas de produccion de soldadesca y equipo

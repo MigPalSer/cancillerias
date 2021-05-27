@@ -1,5 +1,7 @@
 package modelo.tropas.cadena;
 
+import modelo.tropas.ServicioColeccionTropas;
+
 //Describe los tres estadios de la cadena de produccion
 public class CadenaProduccion {
 
@@ -47,5 +49,12 @@ public class CadenaProduccion {
 	}
 	
 	
-	
+	public void avanzarCadena() {
+		SeccionCadena c0=this.getActual();
+		SeccionCadena c1=this.getProximo_turno();
+		SeccionCadena c2=this.getDos_turnos();
+		
+		ServicioColeccionTropas.transferirTodo(c1, c0);
+		ServicioColeccionTropas.transferirTodo(c2, c1);
+	}
 }

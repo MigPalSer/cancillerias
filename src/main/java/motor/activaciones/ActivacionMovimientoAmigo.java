@@ -6,6 +6,7 @@ import modelo.escenario.Escenario;
 import modelo.jugador.*;
 import modelo.territorio.Territorio;
 import modelo.tropas.Bandera;
+import motor.activaciones.despliegue.ServicioDespliegue;
 import motor.activaciones.mover.ServicioConexiones;
 import motor.activaciones.mover.ServicioMovimientos;
 import motor.vista.*;
@@ -37,8 +38,9 @@ public class ActivacionMovimientoAmigo extends Activacion {
 				ServicioMensajes.tropasContendientes(t);
 				
 				//Produce si corresponde
-				ServicioActivaciones.Despliegue(j, t);
-				
+				if(t.getPropietario().equals(j)) {
+					ServicioDespliegue.despliegue(j, t);
+					}
 				
 				//TODE Anterior método activar
 				/*
