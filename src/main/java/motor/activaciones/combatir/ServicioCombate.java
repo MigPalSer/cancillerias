@@ -98,12 +98,18 @@ public class ServicioCombate {
 				//Asignamos los impactos
 		bandas_atacantes.stream().forEach(b->ServicioDanho.asignacionImpactos(b, impactosalosatacantes.get(b)));
 		bandas_defensoras.stream().forEach(b->ServicioDanho.asignacionImpactos(b, impactosalosdefensores.get(b)));
-		//TODO CONTINUAR 
-		/*
+		
 		//Mejoramos a los supervivientes
-		banda_atacante.mejorarTropas(numeroMejoras(infanteria_defensora));
-		banda_defensora.mejorarTropas(numeroMejoras(infanteria_atacante));
 
+		HashMap<Bandera, Integer> mejoraslosatacantes=ServicioColeccionTropas.asignarAlAzarBanderasSegunUnidades(dado, infanteria_defensora, bandas_atacantes);
+		HashMap<Bandera, Integer> mejorasdelosdefensores=ServicioColeccionTropas.asignarAlAzarBanderasSegunUnidades(dado, infanteria_atacante, bandas_defensoras);
+		
+		bandas_atacantes.stream().forEach(b->b.mejorarTropas(mejoraslosatacantes.get(b)));
+		bandas_defensoras.stream().forEach(b->b.mejorarTropas(mejorasdelosdefensores.get(b)));
+
+		//TODO CONTINUAR 
+				/*
+		
 		//Disparamos la captura de equipo si corresponde
 		capturarEquipo(banda_atacante, banda_defensora);
 		*/
