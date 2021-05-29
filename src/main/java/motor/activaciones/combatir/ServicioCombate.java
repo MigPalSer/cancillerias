@@ -40,11 +40,11 @@ public class ServicioCombate {
 		if(banda_atacante.tieneAviones()&&banda_defensora.tieneAviones()) {
 			combateAereo(banda_atacante, banda_defensora);
 		}
-		//Extraemos los valores de cuánta infanteria tiene cada bando, servirán para las mejora
+		//Extraemos los valores de cuï¿½nta infanteria tiene cada bando, servirï¿½n para las mejora
 		int infanteria_atacante=banda_atacante.numeroInfanterias();
 		int infanteria_defensora=banda_defensora.numeroInfanterias();		
 
-		//Calculamos cuántos impactos hace cada bandera
+		//Calculamos cuï¿½ntos impactos hace cada bandera
 		int impactos_al_atacante=calcularImpactosTotales(banda_defensora, false);
 		int impactos_al_defensor=calcularImpactosTotales(banda_atacante, true);
 		
@@ -65,7 +65,7 @@ public class ServicioCombate {
 
 	}
 	
-	//Método encargado de realizar combates terrestres entre dos grupos de banderas
+	//Mï¿½todo encargado de realizar combates terrestres entre dos grupos de banderas
 	public static void combateTerrestreMultiple(Set<Bandera> bandas_atacantes, Set<Bandera> bandas_defensoras) {
 		
 		
@@ -77,11 +77,11 @@ public class ServicioCombate {
 			combateAereoMultiple(bandas_atacantes, bandas_defensoras);
 		}
 		
-		//Extraemos los valores de cuánta infanteria tiene cada bando, servirán para las mejora
+		//Extraemos los valores de cuï¿½nta infanteria tiene cada bando, servirï¿½n para las mejora
 		int infanteria_atacante=bandas_atacantes.stream().mapToInt(b->b.numeroInfanterias()).sum();
 		int infanteria_defensora=bandas_defensoras.stream().mapToInt(b->b.numeroInfanterias()).sum();		
 
-		//Calculamos cuántos impactos hace cada bandera
+		//Calculamos cuï¿½ntos impactos hace cada bandera
 		int impactos_al_atacante=bandas_defensoras.stream()
 				.mapToInt(b->calcularImpactosTotales(b, false)).sum();
 		int impactos_al_defensor=bandas_atacantes
@@ -139,7 +139,7 @@ public class ServicioCombate {
 			int impactos_al_atacante=disparoTerreste(valor_defensores, aviones_defensores);
 			int impactos_al_defensor=disparoTerreste(valor_atacantes, aviones_atacantes);
 			
-			//Aplicamos las bajas o las situamos a 0 si han sobrepasado el número
+			//Aplicamos las bajas o las situamos a 0 si han sobrepasado el nï¿½mero
 			aviones_atacantes=aviones_atacantes>impactos_al_atacante?aviones_atacantes-impactos_al_atacante:0;
 			aviones_defensores=aviones_defensores>impactos_al_defensor?aviones_defensores-impactos_al_defensor:0;
 			
@@ -172,7 +172,7 @@ public class ServicioCombate {
 		bandas_defensoras.stream().forEach(b->mapadefensores.put(b.getPropietario().getNombre(), b));
 
 		
-		ServicioMensajes.println("Combate aereo múltiple iniciado");
+		ServicioMensajes.println("Combate aereo mï¿½ltiple iniciado");
 		
 		int rondas=0;
 		
@@ -187,7 +187,7 @@ public class ServicioCombate {
 					.mapToInt(b->disparoTerreste(b.get("aviones"), b.getValorAtaque("aviones", true)))
 					.sum();
 			
-			//Creamos una lista de strings para distribuir los daños al azar y la barajamos
+			//Creamos una lista de strings para distribuir los daï¿½os al azar y la barajamos
 			List<String> aviones_por_propietario_atacantes=new ArrayList<String>();
 			bandas_atacantes.stream().forEach(b->{
 				String propietario=b.getPropietario().getNombre();
@@ -205,8 +205,8 @@ public class ServicioCombate {
 			Collections.shuffle(aviones_por_propietario_defensores);
 			
 			//Vamos asignando impactos en las listas ya barajadas
-			asignarImpactosCombateAereoMúltiple(mapaatacantes, impactos_al_atacante, aviones_por_propietario_atacantes);
-			asignarImpactosCombateAereoMúltiple(mapadefensores, impactos_al_defensor, aviones_por_propietario_defensores);
+			asignarImpactosCombateAereoMultiple(mapaatacantes, impactos_al_atacante, aviones_por_propietario_atacantes);
+			asignarImpactosCombateAereoMultiple(mapadefensores, impactos_al_defensor, aviones_por_propietario_defensores);
 			
 			//Recalculamos los aviones por bando
 
@@ -219,7 +219,7 @@ public class ServicioCombate {
 		
 	}
 	
-	public static void asignarImpactosCombateAereoMúltiple(HashMap<String, Bandera> mapa, int impactos, List<String> aviones_por_propietario) {
+	public static void asignarImpactosCombateAereoMultiple(HashMap<String, Bandera> mapa, int impactos, List<String> aviones_por_propietario) {
 		if(impactos>aviones_por_propietario.size()) {
 			mapa.values().stream().forEach(b->b.set("aviones", 0));
 		}else {
@@ -230,7 +230,7 @@ public class ServicioCombate {
 		}
 	}
 	
-	//Este método se utiliza para que si una bandera se ha quedado sin infanterias pero la otra aún tiene (tras el combate) logre capturar todas las piezas de equipo
+	//Este mï¿½todo se utiliza para que si una bandera se ha quedado sin infanterias pero la otra aï¿½n tiene (tras el combate) logre capturar todas las piezas de equipo
 	public static void capturarEquipo(Bandera banda_atacante, Bandera banda_defensora) {
 		int infa=banda_atacante.numeroInfanterias();
 		int infd=banda_defensora.numeroInfanterias();
@@ -247,7 +247,7 @@ public class ServicioCombate {
 		for (String s : b.getTropas().keySet()) {
 			int numero=b.get(s);
 			if(numero>0) {
-				//Reduccion del número de equipos que intervienen, maximo por infanterias
+				//Reduccion del nï¿½mero de equipos que intervienen, maximo por infanterias
 			if(b.getModelo(s).getClasificacion().equals(Clasificacion.TERRESTRE_EQUIPO))numero=b.numeroInfanterias()>=numero?numero:b.numeroInfanterias();	
 			
 			int valor=b.getValorAtaque(s, atacante);
