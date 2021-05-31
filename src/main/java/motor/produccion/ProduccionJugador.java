@@ -18,8 +18,8 @@ public class ProduccionJugador {
 	public static void produccion(Jugador j) {
 		
 		//La idea es que el jugador tiene una serie de recursos y de opciones para comprar que
-		//se iran añadiendo a sus diferentes colas, la idea sería crear un método facilmente ampliable
-		//Con lo cual deberíamos tener: coste, tipo de unidad, cola a la que va
+		//se iran aï¿½adiendo a sus diferentes colas, la idea serï¿½a crear un mï¿½todo facilmente ampliable
+		//Con lo cual deberï¿½amos tener: coste, tipo de unidad, cola a la que va
 		HashSet<ModeloUnidad> opciones=j.getPlantillaProduccion().getOpciones();
 		ServicioMensajes.println(j.getNombre()+" con dinero "+j.getDinero()+" produce:");
 		
@@ -27,7 +27,7 @@ public class ProduccionJugador {
 		for (ModeloUnidad opc : opciones) {
 			if(opc.getColaInicial()!=-1) {
 			int coste=opc.getCosteDinero();
-			String tipo=opc.getTipo();
+			String tipo=opc.getNombre();
 			//Preguntamos cuantos queremos construir (OJO QUE NO NOS SACA EL MAXIMO SI FALLAMOS)
 			ServicioMensajes.println("Cuantas "+tipo+" a coste "+coste);
 			int cantidad=j.getControlador().decidir("producir");
@@ -38,7 +38,7 @@ public class ProduccionJugador {
 				j.gastar(precio);
 				//Elegimos la cola correspondiente
 				SeccionCadena cola=selectorCola(j, opc.getColaInicial());
-				//Lo añadimos a la cola
+				//Lo aï¿½adimos a la cola
 				ServicioColeccionTropas.aumentar(cola, cantidad, tipo);
 				
 			}else {

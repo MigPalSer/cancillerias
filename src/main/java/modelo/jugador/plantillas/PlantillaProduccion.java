@@ -44,7 +44,7 @@ public class PlantillaProduccion {
 	void generaMapaOpciones() {
 		mapaOpciones=new HashMap<String, ModeloUnidad>();
 		for (ModeloUnidad modeloUnidad : opciones) {
-			mapaOpciones.put(modeloUnidad.getTipo(), modeloUnidad);
+			mapaOpciones.put(modeloUnidad.getNombre(), modeloUnidad);
 		}
 	}
 }

@@ -8,7 +8,7 @@ public class Aviones extends EquipoAbstracto {
 
 	public Aviones() {
 		super();
-		tipo="aviones";
+		nombre="aviones";
 		colaInicial=1; 
 		costeDinero=10;
 		valorAtaque=8; 

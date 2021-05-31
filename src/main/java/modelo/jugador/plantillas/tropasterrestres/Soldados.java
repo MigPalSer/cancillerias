@@ -8,7 +8,7 @@ public class Soldados extends InfanteriaAbstracta {
 
 	public Soldados() {
 		super();
-		tipo="soldados";
+		nombre="soldados";
 		colaInicial=1; 
 		costeDinero=4;
 		valorAtaque=7; 

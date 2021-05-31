@@ -8,7 +8,7 @@ public class Carros extends EquipoAbstracto {
 
 	public Carros() {
 		super();
-		tipo="carros";
+		nombre="carros";
 		colaInicial=1; 
 		costeDinero=6;
 		valorAtaque=7; 

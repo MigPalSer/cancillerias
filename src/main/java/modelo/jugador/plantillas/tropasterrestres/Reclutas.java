@@ -8,7 +8,7 @@ public class Reclutas extends InfanteriaAbstracta {
 
 	public Reclutas() {
 		super();
-		tipo="reclutas";
+		nombre="reclutas";
 		colaInicial=0; 
 		costeDinero=3;
 		valorAtaque=8; 

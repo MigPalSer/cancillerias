@@ -1,0 +1,32 @@
+#
+# 
+#
+Jugadores:
+Naciones:
+Plantillas:
+ #   - nombre: string
+ #     clasificacion: string enum (infanteria, equipo, edificio, naval)
+ #     colaInicial: int (0 a 2), por defecto -1
+ #     costeDinero: int 
+ #     valorAtaque: int 
+ #     valorDefensa: int
+ #     tablaSupervivencia: string, por defecto estandar
+ #     aviacion: boolean, por defecto falso
+ #     bonoAviacion: boolean, por defecto falso
+ #     mejora: string, nombre de la mejora; por defecto ninguna
+ #     puedeMejorar: boolean; por defecto falso
+      
+    - nombre: reclutas
+      clasificacion: infanteria
+      colaInicial: 0
+      costeDinero: 3
+      valorAtaque: 8
+      valorDefensa: 6
+      tablaSupervivencia: 
+      aviacion:
+      bonoAviacion:
+      mejora: soldados
+      puedeMejorar: True
+      
+Territorios:
+TropasIniciales:

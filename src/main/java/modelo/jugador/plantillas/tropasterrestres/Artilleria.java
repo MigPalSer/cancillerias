@@ -8,7 +8,7 @@ public class Artilleria extends EquipoAbstracto {
 
 	public Artilleria() {
 		super();
-		tipo="artilleria";
+		nombre="artilleria";
 		colaInicial=1; 
 		costeDinero=4;
 		valorAtaque=5; 

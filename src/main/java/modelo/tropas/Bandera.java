@@ -13,8 +13,8 @@ import motor.vista.ServicioMensajes;
 
 public class Bandera extends ColeccionTropas {
 
-	//Su responsabilidad es darnos la información de las fuerzas que hay en un determinado lugar
-	//siempre interactuará a través de su territorio.
+	//Su responsabilidad es darnos la informaciï¿½n de las fuerzas que hay en un determinado lugar
+	//siempre interactuarï¿½ a travï¿½s de su territorio.
 	
 	protected Jugador propietario;
 	
@@ -26,7 +26,7 @@ public class Bandera extends ColeccionTropas {
 		this.propietario = propietario;
 	}
 	
-	//Pequeña funcionalidad para ver si una bandera está vacía
+	//Pequeï¿½a funcionalidad para ver si una bandera estï¿½ vacï¿½a
 	public boolean isVacia() {
 		boolean vacia=true;
 		
@@ -96,7 +96,7 @@ public class Bandera extends ColeccionTropas {
 			Optional<String> str=tropasString.stream().
 			map(this::getModelo).
 			filter((m)->m.puedeMejorar()).
-			map((m)->m.getTipo()).
+			map((m)->m.getNombre()).
 			findFirst();
 			
 			asciendeUnidad(str.get());
@@ -105,7 +105,7 @@ public class Bandera extends ColeccionTropas {
 		}}
 	
 	
-	//Método responsable de quitar uno de s y añadir uno de su mejora
+	//Mï¿½todo responsable de quitar uno de s y aï¿½adir uno de su mejora
 	//NO es responsable de verificar que sea mejorable ni de que haya al menos uno que mejorar
 	public void asciendeUnidad(String s) {
 		String mejora=getModelo(s).mejora();
@@ -140,7 +140,7 @@ public class Bandera extends ColeccionTropas {
 		return tropas.keySet();
 	}
 	
-	//Devuelve el número de tropas de tierra en la bandera
+	//Devuelve el nï¿½mero de tropas de tierra en la bandera
 	public int size() {
 		int unidades=0;
 		for (String s : tropas.keySet()) {

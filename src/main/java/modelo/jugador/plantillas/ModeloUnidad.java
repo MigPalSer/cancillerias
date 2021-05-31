@@ -6,7 +6,7 @@ public abstract class ModeloUnidad {
 		TERRESTRE_INFANTERIA, TERRESTRE_EQUIPO, MARINA, EDIFICIO, OTRO;
 	}
 	
-	protected String tipo;
+	protected String nombre;
 	protected Clasificacion clasificacion;
 
 	//Propiedades de construccion
@@ -20,12 +20,12 @@ public abstract class ModeloUnidad {
 	public abstract String sobrevive(int tirada);
 
 	////Getters y setters
-	public String getTipo() {
-		return tipo;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setNombre(String tipo) {
+		this.nombre = tipo;
 	}
 
 	public Clasificacion getClasificacion() {
@@ -103,7 +103,7 @@ public abstract class ModeloUnidad {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((clasificacion == null) ? 0 : clasificacion.hashCode());
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		return result;
 	}
 
@@ -118,10 +118,10 @@ public abstract class ModeloUnidad {
 		ModeloUnidad other = (ModeloUnidad) obj;
 		if (clasificacion != other.clasificacion)
 			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
+		if (nombre == null) {
+			if (other.nombre != null)
 				return false;
-		} else if (!tipo.equals(other.tipo))
+		} else if (!nombre.equals(other.nombre))
 			return false;
 		return true;
 	}
