@@ -4,7 +4,7 @@
 
 *Coste -1 y cola inicial -1 indica que no se puede producir por medios normales*
 
-#####Infantería
+##### Infantería
 *Las infanterías son la unidad clave para la guerra terrestre*
 
 |Unidad|Coste|Cola inicial|ataque|defensa|reglas especiales|
@@ -13,7 +13,7 @@
 |Soldados|4|1|7|6|mejora(veteranos)|
 |Veteranos|-1|-1|7|5||
 
-#####Equipo
+##### Equipo
 
 |Unidad|Coste|Cola inicial|ataque|defensa|reglas especiales|
 |---|---|---|---|---|---|
@@ -21,17 +21,17 @@
 |Carros|6|1|7|7|supervivencia(carros)|
 |Aviones|8|1|8|8|observador, combate aéreo|
 
-#####Navales
+##### Navales
 
 |Unidad|Coste|Cola inicial|combate|reglas especiales|
-|---|---|---|---|---|---|
+|---|---|---|---|---|
 |Acorazado|20|2|5|supervivencia(acorazado), bombardeo naval (2)|
 |Crucero|13|2|6|bombardeo naval (1)|
 |Torpedero|7|1|8|guardacostas|
 |Submarino|8|1|7|sumergible, ataque sorpresa, guerra submarina|
 |Transporte|5|1|-|desarmado, transportar|
 
-#####Edificios
+##### Edificios
 
 |Unidad|Coste|Cola inicial|Máximo en territorio|Captura|reglas especiales|
 |---|---|---|---|---|---|
@@ -47,15 +47,16 @@
 
 ### Reglas generales de las unidades
 
--Infantería:
-    -Las unidades de infantería se mueven en tierra (territorios).
-    -Durante el despliegue, se pueden desplegar tantas unidades de infantería como la soldadesca del territorio.
--Equipo:
-    -Las unidades de equipo se mueven en tierra (territorios).
-    -Cada tipo unidad de equipo en combate tiene un máximo de disparos determinado por la infantería presente en la bandera.
-    -Si antes o después de un combate uno de los bandos dispone de infantería y el otro no, todas las unidades de equipo del que no disponga de infantería son capturadas por el otro bando (sorteándose en función de las infanterías presentes).
-    -Las unidades de equipo no participan del combate en la activación en la que son desembarcadas, pero pueden ser capturadas.
-    -Durante el despliegue, se pueden desplegar tantas unidades de equipo como fábricas haya en el territorio.
+- Infantería:
+    - Las unidades de infantería se mueven en tierra (territorios).
+    - Durante el despliegue, se pueden desplegar tantas unidades de infantería como la soldadesca del territorio.
+- Equipo:
+    - Las unidades de equipo se mueven en tierra (territorios).
+    - Cada tipo unidad de equipo en combate tiene un máximo de disparos determinado por la infantería presente en la bandera.
+    - Si antes o después de un combate uno de los bandos dispone de infantería y el otro no, todas las unidades de equipo del que no disponga de infantería son capturadas por el otro bando (sorteándose en función de las infanterías presentes).
+    - Las unidades de equipo no participan del combate en la activación en la que son desembarcadas, pero pueden ser capturadas.
+    - Durante el despliegue, se pueden desplegar tantas unidades de equipo como fábricas haya en el territorio.
+
 -Navales:
     -Las unidades navales se mueven en mar, pueden estar en mar abierto o en la costa de un territorio.
     -Durante el despliegue se pueden desplegar tantas unidades navales en la costa del territorio como astilleros haya.
