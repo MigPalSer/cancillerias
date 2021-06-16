@@ -2,7 +2,9 @@
 
 ### Tabla unidades
 
-*Coste -1 y cola inicial -1 indica que no se puede producir por medios normales*
+*Coste -1 y cola inicial -1 indica que no se puede producir por medios normales
+
+Las unidades que por tecnología no pueden ser producidas al comienzo modifican su valor de cola inicial a -1 para indicar al juego que no pueden ser producidas todavía*
 
 ##### Infantería
 *Las infanterías son la unidad clave para la guerra terrestre*
