@@ -1,3 +1,5 @@
+## Paused project
+
 # cancillerias
 
 Cancillerias ("chanceries") is a free-time made game of strategy in the 1895 era.
